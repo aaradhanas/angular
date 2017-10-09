@@ -1,4 +1,4 @@
-# Clientpanel
+#Client Panel
 
 This is a client management application built using Angular. An authorized user can log into the system and perform the following actions.
 
@@ -15,12 +15,8 @@ This is a client management application built using Angular. An authorized user 
 
 ## Run application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+The project does not contain the dependent node modules. To have the app running on your machine, do the following:
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+* Go to the project working directory
+* Run `npm install`
+* Run `ng serve` for a dev server.
