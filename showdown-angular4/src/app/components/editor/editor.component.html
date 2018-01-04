@@ -1,4 +1,4 @@
 <div id="editor-wrapper" class="container">
   <textarea id="editor" [(ngModel)]="text"> {{ text }}</textarea>
-  <showdown id="preview" [value]="text"></showdown>
+  <showdown id="preview" [value]="text" [options]="this.dataService.getOptions()"></showdown>
 </div>

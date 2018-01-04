@@ -1,12 +1,37 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Output, EventEmitter } from '@angular/core';
 
 import { Http, Headers, RequestOptions } from '@angular/http'; 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 
+import { IConverterOptionsChangeable } from 'ngx-showdown';
+
 @Injectable()
 export class DataService {
+
+
+  @Output()
+  versionChange: EventEmitter<String> = new EventEmitter();
+
+  options : IConverterOptionsChangeable = {
+    omitExtraWLInCodeBlocks: true,
+    noHeaderId: false,
+    parseImgDimensions: true,
+    simplifiedAutoLink: true,
+    literalMidWordUnderscores: true,
+    strikethrough: true,
+    tables: true,
+    tablesHeaderId: false,
+    ghCodeBlocks: true,
+    tasklists: true,
+    smoothLivePreview: true,
+    disableForced4SpacesIndentedSublists: false,
+    ghCompatibleHeaderId: true,
+    smartIndentationFix: false,
+    headerLevelStart: 3,
+    prefixHeaderId: ''
+  }
 
   constructor(private http: Http) { }
 
@@ -23,5 +48,18 @@ export class DataService {
 
   getHash(){
     return this.http.get('assets/md/text.md');
+  }
+
+  getOptions(){
+    return this.options;
+  }
+
+  updateOptions(){
+    //TODO
+  }
+
+  //This method is used for transmitting the current active version from left navbar to top navbar
+  updateVersion(version){
+    this.versionChange.emit(version);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
 import { IConverterOptionsChangeable } from 'ngx-showdown';
@@ -10,56 +10,42 @@ import { IConverterOptionsChangeable } from 'ngx-showdown';
 })
 export class LeftNavbarComponent implements OnInit {
 
-  checkOpts : IConverterOptionsChangeable = {
-    omitExtraWLInCodeBlocks: true,
-    noHeaderId: false,
-    parseImgDimensions: true,
-    simplifiedAutoLink: true,
-    literalMidWordUnderscores: true,
-    strikethrough: true,
-    tables: true,
-    tablesHeaderId: false,
-    ghCodeBlocks: true,
-    tasklists: true,
-    smoothLivePreview: true,
-    prefixHeaderId: false,
-    disableForced4SpacesIndentedSublists: false,
-    ghCompatibleHeaderId: true,
-    smartIndentationFix: false
-  }
-
-  numOpts : IConverterOptionsChangeable = {
-    headerLevelStart: 1
-  }
-
-  textOpts : IConverterOptionsChangeable = {
-    ghMentionsLink: 'https://github.com/{u}',
-    prefixHeaderId: ''
-  }
 
   checked:boolean = false;
   versions:string[] = [];
+  options: IConverterOptionsChangeable = {};
 
   //set the current active version
   activeVersion:string = "1.8.5";
-
-  constructor(private dataService:DataService) { }
-
   
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
     this.dataService.getVersions().subscribe( data => {
       this.versions = data;
       console.log("Versions : "+ this.versions);
     });
+  
+    this.options = this.dataService.getOptions();
+    console.log("options = "+this.options);
   }
 
   onVersionChange(){
     console.log("Changed version = "+ this.activeVersion);
+    this.dataService.updateVersion(this.activeVersion);
   }
 
   keys(obj: Object) {
     return Object.keys(obj);
-}
+  }
+
+  isType( value:any, type:string){
+    //console.log("value = "+ value+ ", type = "+type);
+    return typeof value === type;
+  }
+
+  updateOptions(event){
+    console.log(this.options);
+  }
 
 }

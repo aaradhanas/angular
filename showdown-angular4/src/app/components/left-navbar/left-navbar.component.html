@@ -3,19 +3,23 @@
     <div class="title">Options</div>
     <div class="lateral-menu-content-inner">
 
-      <div *ngFor="let key of keys(checkOpts)">
-        <input id="checkOpts-{{$key}}" ng-click="updateOptions(); repaint();" type="checkbox" ([ngModel])="checkOpts[key]" />
-        <label for="checkOpts-{{$key}}" class="inline">{{ key }}</label>
+      <div *ngFor="let key of keys(options)">
+        <div *ngIf="isType(options[key],'boolean')">
+          <input id="options-{{$key}}" (click)="updateOptions()" type="checkbox" ([ngModel])="options[key]"/>
+          <label for="options-{{$key}}" class="inline">{{ key }}</label>
+        </div>
+
+        <div *ngIf="isType(options[key],'number')">
+            <label for="options-{{$key}}">{{ key }}</label>
+          <input id="options-{{$key}}" (change)="updateOptions()" type="number" ([ngModel])="options[key]"/>
+        </div>
+
+        <div *ngIf="isType(options[key],'string')">
+          <label for="options-{{$key}}">{{ key }}</label>
+          <input id="options-{{$key}}" (ngModelChange)="updateOptions()" type="text" ([ngModel])="options[key]" />
+        </div>
       </div>
       <hr>
-      <div *ngFor="let key of keys(numOpts)">
-        <label for="numOpts-{{$key}}">{{ key }}</label>
-        <input id="numOpts-{{$key}}" ng-change="updateOptions(); repaint();" type="number" ([ngModel])="checkOpts[key]"/>
-      </div>
-      <div *ngFor="let key of keys(textOpts)">
-        <label for="textOpts-{{$key}}">{{opt.name}}</label>
-        <input id="textOpts-{{$key}}" data-ng-change="updateOptions(); repaint();" type="text" ([ngModel])="checkOpts[key]"/>
-      </div>
       <div>
         <label for="showdownVersion">Showdown Version</label>
         <select name="versions" [(ngModel)]="activeVersion" (change)="onVersionChange()">

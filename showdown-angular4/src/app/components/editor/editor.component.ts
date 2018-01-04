@@ -22,7 +22,6 @@ export class EditorComponent implements OnInit {
     this.dataService.getHash()
     .subscribe(res => {
       this.text = res.text();
-      console.log("text = "+ this.text);
     });
   }
 

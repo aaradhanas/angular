@@ -15,12 +15,12 @@ export class TopNavbarComponent implements OnInit {
   text: string;
   hashText: string;
 
-  versions:string[] = [];
-
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-   
+    this.dataService.versionChange.subscribe( version => {
+      this.version = version;
+    })
   }
 
   getHash(){
