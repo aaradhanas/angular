@@ -5,18 +5,19 @@
 
       <div *ngFor="let key of keys(options)">
         <div *ngIf="isType(options[key],'boolean')">
-          <input id="options-{{$key}}" (click)="updateOptions()" type="checkbox" ([ngModel])="options[key]"/>
+          <input id="options-{{$key}}" (click)="updateOptions()" type="checkbox" ([ngModel])="options[key]" [checked]="options[key]"/>
           <label for="options-{{$key}}" class="inline">{{ key }}</label>
         </div>
 
         <div *ngIf="isType(options[key],'number')">
-            <label for="options-{{$key}}">{{ key }}</label>
-          <input id="options-{{$key}}" (change)="updateOptions()" type="number" ([ngModel])="options[key]"/>
+            <label for="options-{{key}}">{{ key }}</label>
+            <input id="options-{{key}}" (ngModelChange)="updateOptions($event)" type="number" 
+                  [ngModel]="options[key]" [value]="options[key]"/>
         </div>
 
         <div *ngIf="isType(options[key],'string')">
-          <label for="options-{{$key}}">{{ key }}</label>
-          <input id="options-{{$key}}" (ngModelChange)="updateOptions()" type="text" ([ngModel])="options[key]" />
+          <label for="options-{{key}}">{{ key }}</label>
+          <input id="options-{{key}}" type="text" ([ngModel])="options[key]" [value]="options[key]"/>
         </div>
       </div>
       <hr>

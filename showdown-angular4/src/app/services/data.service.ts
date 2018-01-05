@@ -13,6 +13,7 @@ export class DataService {
 
   @Output()
   versionChange: EventEmitter<String> = new EventEmitter();
+  optionsChange: EventEmitter<String> = new EventEmitter();
 
   options : IConverterOptionsChangeable = {
     omitExtraWLInCodeBlocks: true,
@@ -30,7 +31,7 @@ export class DataService {
     ghCompatibleHeaderId: true,
     smartIndentationFix: false,
     headerLevelStart: 3,
-    prefixHeaderId: ''
+    prefixHeaderId: 'hId'
   }
 
   constructor(private http: Http) { }
@@ -54,8 +55,10 @@ export class DataService {
     return this.options;
   }
 
-  updateOptions(){
+  updateOptions(key,event){
     //TODO
+    console.log("Updated options 2 = "+event);
+    this.optionsChange.emit( JSON.stringify({"key": key, "value" : event }));
   }
 
   //This method is used for transmitting the current active version from left navbar to top navbar

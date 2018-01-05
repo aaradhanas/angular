@@ -27,11 +27,10 @@ export class LeftNavbarComponent implements OnInit {
     });
   
     this.options = this.dataService.getOptions();
-    console.log("options = "+this.options);
   }
 
   onVersionChange(){
-    console.log("Changed version = "+ this.activeVersion);
+    console.log("Updated version = "+ this.activeVersion);
     this.dataService.updateVersion(this.activeVersion);
   }
 
@@ -44,8 +43,13 @@ export class LeftNavbarComponent implements OnInit {
     return typeof value === type;
   }
 
-  updateOptions(event){
-    console.log(this.options);
+  updateOptions(event, key){
+    console.log("Updated options = "+key);
+
+    this.options[key] = event;
+    console.log("Updated options 1 = "+this.options[key]);
+    this.dataService.updateOptions(key, event);
+
   }
 
 }
