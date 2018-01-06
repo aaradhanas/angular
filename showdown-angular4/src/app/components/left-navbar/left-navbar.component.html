@@ -3,22 +3,21 @@
     <div class="title">Options</div>
     <div class="lateral-menu-content-inner">
 
-      <div *ngFor="let key of keys(options)">
-        <div *ngIf="isType(options[key],'boolean')">
-          <input id="options-{{$key}}" (click)="updateOptions()" type="checkbox" ([ngModel])="options[key]" [checked]="options[key]"/>
-          <label for="options-{{$key}}" class="inline">{{ key }}</label>
-        </div>
+      <div *ngFor="let key of keys(checkOpts)">
+          <input id="checkOpts-{{$key}}" (change)="checkValueChanged()" type="checkbox" [(ngModel)]="checkOpts[key]"/>
+          <label for="checkOpts-{{$key}}" class="inline">{{ key }}</label>
+      </div>
 
-        <div *ngIf="isType(options[key],'number')">
-            <label for="options-{{key}}">{{ key }}</label>
-            <input id="options-{{key}}" (ngModelChange)="updateOptions($event)" type="number" 
-                  [ngModel]="options[key]" [value]="options[key]"/>
-        </div>
+      <div *ngFor="let key of keys(numOpts)">
+            <label for="numOpts-{{key}}">{{ key }}</label>
+            <input id="numOpts-{{key}}" type="number" 
+                  [(ngModel)]="numOpts[key]" (change)="numValueChanged()"/>
+      </div>
 
-        <div *ngIf="isType(options[key],'string')">
-          <label for="options-{{key}}">{{ key }}</label>
-          <input id="options-{{key}}" type="text" ([ngModel])="options[key]" [value]="options[key]"/>
-        </div>
+      <div *ngFor="let key of keys(textOpts)">
+          <label for="textOpts-{{key}}">{{ key }}</label>
+          <input id="textOpts-{{key}}" type="text"
+              [(ngModel)]="textOpts[key]" (change)="textValueChanged()"/>
       </div>
       <hr>
       <div>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
-import { IConverterOptionsChangeable } from 'ngx-showdown';
-import { ShowdownConverter } from 'ngx-showdown';
+import 'showdown';
+
+const showdownJs = require('showdown');
+const converter = new showdownJs.Converter();
 
 @Component({
   selector: 'app-editor',
@@ -12,22 +14,23 @@ import { ShowdownConverter } from 'ngx-showdown';
 export class EditorComponent implements OnInit {
 
   text: string;
-  options: IConverterOptionsChangeable;
+  cText: string;
+  options =  {};
+  cOptions = {};
   
-  constructor(private dataService:DataService, private showdownConverter:ShowdownConverter) { 
+  constructor(private dataService:DataService) { 
   }
 
   ngOnInit() {
     this.getText();
     
     this.options = this.dataService.getOptions();
-  /*   this.options = showdown.getDefaultOptions();
-    console.log("headerLevelStart = "+this.options['headerLevelStart']);*/
-    this.showdownConverter.setOptions(this.options); 
 
-    this.dataService.optionsChange.subscribe( option => {
-      //console.log("headerLevelStart = "+this.options['headerLevelStart']);
-      this.showdownConverter.setOption(JSON.parse(option).key, JSON.parse(option).value);
+    this.dataService.optionsChange.subscribe( opts => {
+      for( var opt in opts){
+        converter.setOption(opt, opts[opt]);
+      }
+      this.cText = converter.makeHtml(this.text);
     });
   }
 
@@ -35,8 +38,7 @@ export class EditorComponent implements OnInit {
     this.dataService.getHash()
     .subscribe(res => {
       this.text = res.text();
+      this.cText = converter.makeHtml(this.text);
     });
   }
-
-
 }

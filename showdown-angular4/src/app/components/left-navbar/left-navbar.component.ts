@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
-import { IConverterOptionsChangeable } from 'ngx-showdown';
 
 @Component({
   selector: 'app-left-navbar',
@@ -13,10 +12,35 @@ export class LeftNavbarComponent implements OnInit {
 
   checked:boolean = false;
   versions:string[] = [];
-  options: IConverterOptionsChangeable = {};
 
   //set the current active version
   activeVersion:string = "1.8.5";
+
+  checkOpts = {
+    'omitExtraWLInCodeBlocks': true,
+    'noHeaderId': false,
+    'parseImgDimensions': true,
+    'simplifiedAutoLink': true,
+    'literalMidWordUnderscores': true,
+    'strikethrough': true,
+    'tables': true,
+    'tablesHeaderId': false,
+    'ghCodeBlocks': true,
+    'tasklists': true,
+    'smoothLivePreview': true,
+    'prefixHeaderId': false,
+    'disableForced4SpacesIndentedSublists': false,
+    'ghCompatibleHeaderId': true,
+    'smartIndentationFix': false
+  };
+  
+  numOpts = {
+    'headerLevelStart': 3
+  };
+
+  textOpts = {
+    'prefixHeaderId' : ''
+  };
   
   constructor(private dataService:DataService) { }
 
@@ -25,8 +49,6 @@ export class LeftNavbarComponent implements OnInit {
       this.versions = data;
       console.log("Versions : "+ this.versions);
     });
-  
-    this.options = this.dataService.getOptions();
   }
 
   onVersionChange(){
@@ -43,13 +65,16 @@ export class LeftNavbarComponent implements OnInit {
     return typeof value === type;
   }
 
-  updateOptions(event, key){
-    console.log("Updated options = "+key);
+  checkValueChanged(){
+    console.log("checkValueChanged = "+ this.dataService.updateOptions(this.checkOpts));
+  }
 
-    this.options[key] = event;
-    console.log("Updated options 1 = "+this.options[key]);
-    this.dataService.updateOptions(key, event);
+  numValueChanged(){
+    console.log("numValueChanged = "+ this.dataService.updateOptions(this.numOpts));
+  }
 
+  textValueChanged(){
+    console.log("textValueChanged = "+ this.dataService.updateOptions(this.textOpts));
   }
 
 }

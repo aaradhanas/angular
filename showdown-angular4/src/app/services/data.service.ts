@@ -5,7 +5,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 
-import { IConverterOptionsChangeable } from 'ngx-showdown';
+import 'showdown';
+
+const showdownJs = require('showdown');
+const converter = new showdownJs.Converter();
 
 @Injectable()
 export class DataService {
@@ -15,7 +18,7 @@ export class DataService {
   versionChange: EventEmitter<String> = new EventEmitter();
   optionsChange: EventEmitter<String> = new EventEmitter();
 
-  options : IConverterOptionsChangeable = {
+  options = {
     omitExtraWLInCodeBlocks: true,
     noHeaderId: false,
     parseImgDimensions: true,
@@ -52,13 +55,15 @@ export class DataService {
   }
 
   getOptions(){
-    return this.options;
+   var options = showdownJs.getDefaultOptions(false);
+   console.log(options);
+   return options;
   }
 
-  updateOptions(key,event){
+  updateOptions(opts){
     //TODO
-    console.log("Updated options 2 = "+event);
-    this.optionsChange.emit( JSON.stringify({"key": key, "value" : event }));
+    console.log("Updated options");
+    this.optionsChange.emit(opts);
   }
 
   //This method is used for transmitting the current active version from left navbar to top navbar
