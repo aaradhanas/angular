@@ -8,9 +8,6 @@ import { TopNavbarComponent } from './components/top-navbar/top-navbar.component
 
 import { DataService } from './services/data.service';
 
-//import { MarkdownModule } from 'angular2-markdown';
-import { ShowdownModule } from 'ngx-showdown';
-
 import { EditorComponent } from './components/editor/editor.component';
 import { LeftNavbarComponent } from './components/left-navbar/left-navbar.component';
 
@@ -25,9 +22,7 @@ import { LeftNavbarComponent } from './components/left-navbar/left-navbar.compon
   imports: [
     BrowserModule,
     HttpModule,
-    //MarkdownModule.forRoot(),
-    FormsModule,
-    ShowdownModule
+    FormsModule
   ],
   providers: [ DataService],
   bootstrap: [AppComponent]

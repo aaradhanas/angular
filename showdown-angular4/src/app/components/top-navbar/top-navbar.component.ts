@@ -11,16 +11,24 @@ import { DataService } from '../../services/data.service';
 export class TopNavbarComponent implements OnInit {
 
   showModal:boolean = false;
-  version:string = 'build';
+  version:string;
   text: string;
   hashText: string;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.version = localStorage.getItem("version") || 'develop';
     this.dataService.versionChange.subscribe( version => {
-      this.version = version;
+      //this.version = version;
+      this.version = localStorage.getItem("version") || 'develop';
     })
+  }
+
+  getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
   }
 
   getHash(){

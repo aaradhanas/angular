@@ -62,7 +62,6 @@ export class DataService {
 
   updateOptions(opts){
     //TODO
-    console.log("Updated options");
     this.optionsChange.emit(opts);
   }
 
