@@ -13,10 +13,12 @@ const converter = new showdownJs.Converter();
 @Injectable()
 export class DataService {
 
+  leftVisible:boolean = true;
 
   @Output()
   versionChange: EventEmitter<String> = new EventEmitter();
   optionsChange: EventEmitter<String> = new EventEmitter();
+  leftVisibleChange: EventEmitter<boolean> = new EventEmitter();
 
   options = {
     omitExtraWLInCodeBlocks: true,
@@ -68,5 +70,14 @@ export class DataService {
   //This method is used for transmitting the current active version from left navbar to top navbar
   updateVersion(version){
     this.versionChange.emit(version);
+  }
+
+  isLeftVisible(){
+    return this.leftVisible;
+  }
+
+  setLeftVisible(isVisible){
+    this.leftVisible = isVisible;
+    this.leftVisibleChange.emit(this.leftVisible);
   }
 }

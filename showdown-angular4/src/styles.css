@@ -233,3 +233,13 @@ pre code {
     color: white;
     font-size: 0.8em !important;
 }
+
+.leftNavVisible{
+    width: 300px;
+    display: block;
+}
+
+.leftNavInvisible {
+    width: 0px;
+    display:none;
+}

@@ -10,7 +10,7 @@ import { DataService } from '../../services/data.service';
 export class LeftNavbarComponent implements OnInit {
 
 
-  checked:boolean = false;
+  visible:boolean;
   versions = ['develop','master'];
 
   //set the current active version
@@ -45,6 +45,11 @@ export class LeftNavbarComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    this.visible = this.dataService.isLeftVisible();
+    this.dataService.leftVisibleChange.subscribe( visible => {
+      this.visible = visible;
+    })
+
     this.dataService.getVersions().subscribe( data => {
       for(var r in data){
         this.versions.push(data[r]);
