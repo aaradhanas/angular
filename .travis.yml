@@ -16,7 +16,7 @@ before_script:
   - npm install
 
 script:
-  - cd ClientPanel
+  - cd ../ClientPanel
   - ng build --aot
   - cd ../FAQApp
   - ng build --aot
