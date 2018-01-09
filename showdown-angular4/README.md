@@ -1,4 +1,4 @@
-# Showdown editor using Angular 4
+# Showdown editor using Angular 4 [![Build Status](https://travis-ci.org/aaradhanas/angular.svg?branch=master)](https://travis-ci.org/aaradhanas/angular)
 
 This project is inspired by the works of the developers of Showdown editor. The existing showdown editor `http://demo.showdownjs.com/` has been developed using AngularJS (Version 1 of Angular). The editor has been rewritten in Angular 4 in a simpler and easier way.
 
