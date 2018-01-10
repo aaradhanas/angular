@@ -14,4 +14,4 @@ before_script:
 
 script:
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
-  - ngh
+  - ngh --repo https://github.com/aaradhanas/angular
