@@ -1,6 +1,10 @@
 # Showdown editor using Angular 4 [![Build Status](https://travis-ci.org/aaradhanas/angular.svg?branch=master)](https://travis-ci.org/aaradhanas/angular)
 
-This project is inspired by the works of the developers of Showdown editor. The existing showdown editor `http://demo.showdownjs.com/` has been developed using AngularJS (Version 1 of Angular). The editor has been rewritten in Angular 4 in a simpler and easier way.
+This project is inspired by the works of the developers of Showdown editor. The [existing showdown editor] (http://demo.showdownjs.com/) has been developed using AngularJS (Version 1 of Angular). The editor has been rewritten in Angular 4 in a simpler and easier way.
+
+## Live app
+
+The showdown editor is published as a github page and is available at <https://aaradhanas.github.io/angular/>
 
 ## Angular 4 components
 
@@ -18,24 +22,28 @@ In order to access the information related to the available releases and sample 
 
 Font-awesome and google fonts has been used here. These have been installed using npm, as follows:
 
-- `npm install font-awesome@4.4.0 --save`
-- `npm install google-fonts@latest --save`
+- npm install font-awesome@4.4.0 --save
+- npm install google-fonts@latest --save
 
 ## Node package for showdown
 
-The node package `https://www.npmjs.com/package/ngx-showdown` has been used to process the showdown content and render it.
+- npm install showdown --save
+- const showdownJs = require('showdown');
+- const converter = new showdownJs.Converter(); 
+- converter.makeHtml("text");
 
-- npm install ngx-showdown --save
-- Add the **ShowdownModule** to the imports of app.module.ts
-- `<showdown [value]="<<showdown text>>"></showdown>`
+## Publish the app as Github page
+
+- npm install -g angular-cli-ghpages --save 
+- ng build --prod --base-href https://aaradhanas.github.io/angular/
+- ngh
 
 ## How to run ?
 
 - Check out the project
-- Go to the root folder
-- Run ng serve
+- npm install
+- ng serve
 
 ## Tasks to do
 
-- Left navigation bar rendering and value change events
 - Adding basic tests using Karma

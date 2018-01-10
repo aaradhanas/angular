@@ -77,4 +77,9 @@ export class EditorComponent implements OnInit {
       this.cText = converter.makeHtml(this.text);
     });
   }
+
+  textChanged(){
+    console.log("textChanged");
+    this.cText = converter.makeHtml(this.text);
+  }
 }

@@ -21,10 +21,10 @@ import { LeftNavbarComponent } from './components/left-navbar/left-navbar.compon
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpModule, 
     FormsModule
   ],
-  providers: [ DataService],
+  providers: [ DataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
