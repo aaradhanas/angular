@@ -12,13 +12,13 @@
       <div *ngFor="let key of keys(numOpts)">
             <label for="numOpts-{{key}}">{{ key }}</label>
             <input id="numOpts-{{key}}" type="number" 
-                  [(ngModel)]="numOpts[key]" (change)="numValueChanged()"/>
+                  [(ngModel)]="numOpts[key]" (input)="numValueChanged()"/>
       </div>
 
       <div *ngFor="let key of keys(textOpts)">
           <label for="textOpts-{{key}}">{{ key }}</label>
           <input id="textOpts-{{key}}" type="text"
-              [(ngModel)]="textOpts[key]" (change)="textValueChanged()"/>
+              [(ngModel)]="textOpts[key]" (input)="textValueChanged()"/>
       </div>
       <hr>
       <div>
