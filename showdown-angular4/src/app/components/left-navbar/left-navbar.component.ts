@@ -16,31 +16,9 @@ export class LeftNavbarComponent implements OnInit {
   //set the current active version
   activeVersion:string;
 
-  checkOpts = {
-    'omitExtraWLInCodeBlocks': true,
-    'noHeaderId': false,
-    'parseImgDimensions': true,
-    'simplifiedAutoLink': true,
-    'literalMidWordUnderscores': true,
-    'strikethrough': true,
-    'tables': true,
-    'tablesHeaderId': false,
-    'ghCodeBlocks': true,
-    'tasklists': true,
-    'smoothLivePreview': true,
-    'prefixHeaderId': false,
-    'disableForced4SpacesIndentedSublists': false,
-    'ghCompatibleHeaderId': true,
-    'smartIndentationFix': false
-  };
-  
-  numOpts = {
-    'headerLevelStart': 3
-  };
-
-  textOpts = {
-    'prefixHeaderId' : ''
-  };
+  checkOpts = {}
+  numOpts = {}
+  textOpts = {}
   
   constructor(private dataService:DataService) { }
 
@@ -61,72 +39,9 @@ export class LeftNavbarComponent implements OnInit {
 
     //TODO Get options based on showdown version
     var options = this.dataService.getOptions();
-    for( var opt in options){
-      if (options.hasOwnProperty(opt)) {
-        var nOpt = (options[opt].hasOwnProperty('defaultValue')) ? options[opt].defaultValue : true;
-        if (options[opt].type === 'boolean') {
-          if (!this.checkOpts.hasOwnProperty(opt)) {
-            this.checkOpts[opt] = nOpt;
-          }
-        } else if (options[opt].type === 'integer') {
-          if (!this.numOpts.hasOwnProperty(opt)) {
-            this.numOpts[opt] = nOpt;
-          }
-        }
-        else{
-          if (!this.textOpts.hasOwnProperty(opt)) {
-            // fix bug in showdown's older version that specifies 'ghCompatibleHeaderId' as a string instead of boolean
-            if (opt === 'ghCompatibleHeaderId') {
-              continue;
-            }
-            if (!nOpt) {
-              nOpt = '';
-            }
-            this.textOpts[opt] = nOpt;
-          }
-        }
-      }
-    }
-
-    var savedCheckOpts;
-    var savedNumOpts;
-    var savedTextOpts;
-
-    if(localStorage.getItem("checkOpts")){
-      savedCheckOpts = JSON.parse(localStorage.getItem("checkOpts"));
-    }
-
-    if(localStorage.getItem("numOpts")){
-      savedNumOpts = JSON.parse(localStorage.getItem("numOpts"));
-    }
-
-    if(localStorage.getItem("textOpts")){
-      savedTextOpts = JSON.parse(localStorage.getItem("textOpts"));
-    }
-
-    for( var opt in this.checkOpts){
-     for( var savedOpt in savedCheckOpts){
-       if(opt === savedOpt){
-         this.checkOpts[opt] = savedCheckOpts[savedOpt];
-       }
-     }
-    }
-
-    for( var opt in this.numOpts){
-      for( var savedOpt in savedNumOpts){
-        if(opt === savedOpt){
-          this.numOpts[opt] = savedNumOpts[savedOpt];
-        }
-      }
-     }
-
-    for( var opt in this.textOpts){
-      for( var savedOpt in savedTextOpts){
-        if(opt === savedOpt){
-          this.textOpts[opt] = savedTextOpts[savedOpt];
-        }
-      }
-     }
+    this.checkOpts = options['checkOpts']
+    this.numOpts = options['numOpts']
+    this.textOpts = options['textOpts']
   }
 
   onVersionChange(){

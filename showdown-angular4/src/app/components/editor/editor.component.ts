@@ -23,16 +23,16 @@ export class EditorComponent implements OnInit {
   savedTextOpts = {};
   
   constructor(private dataService:DataService) { 
+    console.log("this.text = "+ this.text);
   }
 
   ngOnInit() {
-    converter.get
     this.getText();
     
-    this.options = this.dataService.getOptions();
+    this.options = this.dataService.getOptions(); 
 
     //Move the options logic to service
-    if(localStorage.getItem("checkOpts")){
+    /*if(localStorage.getItem("checkOpts")){
        this.savedCheckOpts = JSON.parse(localStorage.getItem("checkOpts"));
     }
 
@@ -56,10 +56,14 @@ export class EditorComponent implements OnInit {
       if( this.savedTextOpts.hasOwnProperty(opt)){
         this.options[opt] = this.savedTextOpts[opt];
       }
-    }
+    }*/
 
-    for( var opt in this.options){
-      converter.setOption(opt, this.options[opt]);
+    for( var optType in this.options){
+      console.log('optType = '+ optType);
+      var typeOpts = this.options[optType];
+      for( var opt in typeOpts){
+        converter.setOption(opt, typeOpts[opt]);
+      }
     }
    
     this.dataService.optionsChange.subscribe( opts => {

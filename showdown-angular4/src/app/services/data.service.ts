@@ -21,22 +21,29 @@ export class DataService {
   leftVisibleChange: EventEmitter<boolean> = new EventEmitter();
 
   options = {
-    omitExtraWLInCodeBlocks: true,
-    noHeaderId: false,
-    parseImgDimensions: true,
-    simplifiedAutoLink: true,
-    literalMidWordUnderscores: true,
-    strikethrough: true,
-    tables: true,
-    tablesHeaderId: false,
-    ghCodeBlocks: true,
-    tasklists: true,
-    smoothLivePreview: true,
-    disableForced4SpacesIndentedSublists: false,
-    ghCompatibleHeaderId: true,
-    smartIndentationFix: false,
-    headerLevelStart: 3,
-    prefixHeaderId: 'hId'
+    'checkOpts' : {
+      'omitExtraWLInCodeBlocks': true,
+      'noHeaderId': false,
+      'parseImgDimensions': true,
+      'simplifiedAutoLink': true,
+      'literalMidWordUnderscores': true,
+      'strikethrough': true,
+      'tables': true,
+      'tablesHeaderId': false,
+      'ghCodeBlocks': true,
+      'tasklists': true,
+      'smoothLivePreview': true,
+      'prefixHeaderId': false,
+      'disableForced4SpacesIndentedSublists': false,
+      'ghCompatibleHeaderId': true,
+      'smartIndentationFix': false
+    },
+    'numOpts' : {
+      'headerLevelStart': 3
+    },
+    'textOpts' : {
+      'prefixHeaderId' : ''
+    }
   }
 
   constructor(private http: Http) { }
@@ -46,7 +53,7 @@ export class DataService {
       .get("https://api.github.com/repos/showdownjs/showdown/releases")
       .map( res => {
         return res.json().map( item => { 
-          return item.tag_name;
+            return item.tag_name;
         });
       })
       //TODO compare versions greater than 1.0.0
@@ -57,9 +64,75 @@ export class DataService {
   }
 
   getOptions(){
-   var options = showdownJs.getDefaultOptions(false);
-   console.log(options);
-   return options;
+   var defaultOptions = showdownJs.getDefaultOptions(false);
+
+   var savedCheckOpts;
+   var savedNumOpts;
+   var savedTextOpts;
+
+   for( var opt in defaultOptions){
+    if (defaultOptions.hasOwnProperty(opt)) {
+      var nOpt = (defaultOptions[opt].hasOwnProperty('defaultValue')) ? defaultOptions[opt].defaultValue : true;
+      if (defaultOptions[opt].type === 'boolean') {
+        if (!this.options.checkOpts.hasOwnProperty(opt)) {
+          this.options.checkOpts[opt] = nOpt;
+        }
+      } else if (defaultOptions[opt].type === 'integer') {
+        if (!this.options.numOpts.hasOwnProperty(opt)) {
+          this.options.numOpts[opt] = nOpt;
+        }
+      }
+      else{
+        if (!this.options.textOpts.hasOwnProperty(opt)) {
+          // fix bug in showdown's older version that specifies 'ghCompatibleHeaderId' as a string instead of boolean
+          if (opt === 'ghCompatibleHeaderId') {
+            continue;
+          }
+          if (!nOpt) {
+            nOpt = '';
+          }
+          this.options.textOpts[opt] = nOpt;
+        }
+      }
+    }
+  }
+  if(localStorage.getItem("checkOpts")){
+    savedCheckOpts = JSON.parse(localStorage.getItem("checkOpts"));
+  }
+
+  if(localStorage.getItem("numOpts")){
+    savedNumOpts = JSON.parse(localStorage.getItem("numOpts"));
+  }
+
+  if(localStorage.getItem("textOpts")){
+    savedTextOpts = JSON.parse(localStorage.getItem("textOpts"));
+  }
+
+  for( var opt in this.options.checkOpts){
+   for( var savedOpt in savedCheckOpts){
+     if(opt === savedOpt){
+       this.options.checkOpts[opt] = savedCheckOpts[savedOpt];
+     }
+   }
+  }
+
+  for( var opt in this.options.numOpts){
+    for( var savedOpt in savedNumOpts){
+      if(opt === savedOpt){
+        this.options.numOpts[opt] = savedNumOpts[savedOpt];
+      }
+    }
+   }
+
+  for( var opt in this.options.textOpts){
+    for( var savedOpt in savedTextOpts){
+      if(opt === savedOpt){
+        this.options.textOpts[opt] = savedTextOpts[savedOpt];
+      }
+    }
+   }
+   
+   return this.options;
   }
 
   updateOptions(opts){
