@@ -11,14 +11,15 @@ import { DataService } from './services/data.service';
 
 import { EditorComponent } from './components/editor/editor.component';
 import { LeftNavbarComponent } from './components/left-navbar/left-navbar.component';
-
+import { TextToShowdownDirective } from './text-to-showdown.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavbarComponent,
     EditorComponent,
-    LeftNavbarComponent
+    LeftNavbarComponent,
+    TextToShowdownDirective
   ],
   imports: [
     BrowserModule,
