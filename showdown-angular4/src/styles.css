@@ -4,6 +4,9 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    position: absolute;
+    transition-duration: 0.5s;
+    transition-property: top, bottom, left, right;
 }
 
 html {
@@ -34,12 +37,14 @@ html {
     animation: squeezeBody 0.5s ease;
     -webkit-animation: squeezeBody 0.5s ease;
     width: calc(100% - 300px);
+    left: 300px;
 }
 
 .full-body {
     animation: stretchBody 0.5s ease;
     -webkit-animation: stretchBody 0.5s ease;
     width: 100%;
+    left: 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -85,8 +90,14 @@ h3 {
 .lateral-menu {
     background-color: #333;
     color: rgb(144, 144, 144);
-    width: 300px;
     font-family: 'Open Sans', 'Myriad Pro', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+    z-index: 1000; 
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
 }
 
 .lateral-menu label {
@@ -232,14 +243,4 @@ pre code {
 .version {
     color: white;
     font-size: 0.8em !important;
-}
-
-.leftNavVisible{
-    width: 300px;
-    display: block;
-}
-
-.leftNavInvisible {
-    width: 0px;
-    display:none;
 }

@@ -1,6 +1,5 @@
-<div class="lateral-menu" [class.leftNavVisible]="visible" [class.leftNavInvisible]="!visible" 
-    style="z-index: 1000; position: fixed; height: 100%; overflow: hidden; transition-duration: 0.5s; transition-property: width, height; top: 0px; bottom: 0px; left: 0px;">
-  <div  *ngIf="visible" class="lateral-menu-content">
+<div class="lateral-menu" [@leftState]="state">
+  <div  class="lateral-menu-content">
     <div class="title">Options</div>
     <div class="lateral-menu-content-inner">
 

@@ -5,10 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 
-import 'showdown';
 
-const showdownJs = require('showdown');
-const converter = new showdownJs.Converter();
+var showdownJs = require('showdown');
 
 @Injectable()
 export class DataService {

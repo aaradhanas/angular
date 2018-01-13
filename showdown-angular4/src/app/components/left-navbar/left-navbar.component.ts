@@ -2,15 +2,29 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
 
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 @Component({
   selector: 'app-left-navbar',
   templateUrl: './left-navbar.component.html',
-  styleUrls: ['./left-navbar.component.css']
+  styleUrls: ['./left-navbar.component.css'],
+  animations : [
+    trigger('leftState', [
+      state( 'visible', style({
+        width: '300px',
+        display: 'block'
+      })),
+      state('invisible', style({
+        width: '0px',
+        display: 'none'
+      })),
+      transition('visible <=> invisible', animate('0.5s ease'))
+    ])
+  ]
 })
 export class LeftNavbarComponent implements OnInit {
 
-
-  visible:boolean;
+  state:string;
   versions = ['develop','master'];
 
   //set the current active version
@@ -23,9 +37,10 @@ export class LeftNavbarComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.visible = this.dataService.isLeftVisible();
+    this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible'
+
     this.dataService.leftVisibleChange.subscribe( visible => {
-      this.visible = visible;
+      this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible'
     })
 
     this.dataService.getVersions().subscribe( data => {

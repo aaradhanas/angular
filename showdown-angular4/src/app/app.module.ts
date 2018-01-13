@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,8 @@ import { LeftNavbarComponent } from './components/left-navbar/left-navbar.compon
   imports: [
     BrowserModule,
     HttpModule, 
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [ DataService ],
   bootstrap: [AppComponent]

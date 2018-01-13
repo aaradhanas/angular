@@ -48,12 +48,10 @@ export class TopNavbarComponent implements OnInit {
     if( this.leftVisible ){
       document.body.classList.remove("full-body");
       document.body.classList.add("squeezed-body");
-      document.body.style.left = "300px";
     }
     else{
       document.body.classList.remove("squeezed-body");
       document.body.classList.add("full-body");
-      document.body.style.left = "0px";
     }
 
     this.dataService.setLeftVisible(this.leftVisible);    
