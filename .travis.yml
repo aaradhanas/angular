@@ -14,6 +14,3 @@ before_script:
 
 script:
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
-  - git config --global github.user aaradhanas
-  - git config --global github.token d2310bc43482d163a2bfb8537d4c3084aa1a787e
-  - ngh --no-silent

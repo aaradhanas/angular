@@ -47,3 +47,7 @@ Font-awesome and google fonts has been used here. These have been installed usin
 ## Tasks to do
 
 - Adding basic tests using Karma
+
+## License
+
+- [MIT license] (https://github.com/aaradhanas/angular/blob/master/LICENSE)
