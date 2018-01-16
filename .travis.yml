@@ -8,9 +8,13 @@ branches:
     - master
 
 before_script:
+  - cd FAQApp
+  - npm install
   - cd showdown-angular4
   - npm install
   - npm install -g angular-cli-ghpages
 
 script:
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
+  - cd ../FAQApp
+  - ng build --prod
