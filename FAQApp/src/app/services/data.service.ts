@@ -4,32 +4,13 @@ import { Question } from '../models/Question';
 @Injectable()
 export class DataService {
 
-  questions:Question[];
+  questions:Question[] = [];
   constructor() { 
-    /*this.questions = [
-      {
-        text: 'What is your name?',
-        answer: 'My name is Aara',
-        hide: true
-      },
-      {
-        text: 'What is your favorite color?',
-        answer: 'My favorite color is BLACK',
-        hide: true
-      },
-      {
-        text: 'What is your favorite language?',
-        answer: 'My favorite language is Java',
-        hide: true
-      }
-    ]*/
   }
 
   // Get questions from local storage
   getQuestions(){
-    if(localStorage.getItem('questions') === null){
-      this.questions = [];
-    }else{
+    if(localStorage.getItem('questions') != null){
       this.questions = JSON.parse(localStorage.getItem('questions'));
     }
     return this.questions;

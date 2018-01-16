@@ -1,15 +1,22 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { DataService } from './data.service';
+import { Question } from '../models/Question'
 
-describe('DataService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [DataService]
-    });
+describe('DataService isolated test', () => {
+  let service: DataService;
+
+  beforeEach( () => {
+    service = new DataService();
   });
 
-  it('should be created', inject([DataService], (service: DataService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('Get questions', () => {
+    expect(service.getQuestions()).toEqual([]);
+  })
+
+  it('Add new question', () => {
+    let newQuestion = new Question('What is your name?', 'Sherlock', false);
+    service.addQuestion(newQuestion);
+    expect(service.getQuestions()[0].text).toEqual(newQuestion.text);
+  })
 });
