@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core'
-import { By } from '@angular/platform-browser'
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { NavbarComponent } from './navbar.component';
 

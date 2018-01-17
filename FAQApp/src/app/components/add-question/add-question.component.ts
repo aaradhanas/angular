@@ -10,18 +10,18 @@ export class AddQuestionComponent implements OnInit {
 
   @Output() questionAdded = new EventEmitter<Question>();
 
-  text:string;
-  answer:string;
+  text: string;
+  answer: string;
   constructor() { }
 
   ngOnInit() {
   }
 
-  addQuestion(){
+  addQuestion() {
     this.questionAdded.emit({
-      text:this.text,
-      answer:this.answer,
-      hide:true
+      text: this.text,
+      answer: this.answer,
+      hide: true
     });
   }
 

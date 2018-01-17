@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core'
-import { By } from '@angular/platform-browser'
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { QuestionComponent } from './question.component';
-import { DataService } from '../../services/data.service'
+import { DataService } from '../../services/data.service';
 
 describe('QuestionComponent', () => {
   let component: QuestionComponent;
@@ -14,7 +14,7 @@ describe('QuestionComponent', () => {
 
   beforeEach(async(() => {
 
-    var dataServiceStub = {}
+    const dataServiceStub = {};
     TestBed.configureTestingModule({
       declarations: [ QuestionComponent ],
       providers: [{provide: DataService, useValue: dataServiceStub}]
@@ -27,10 +27,10 @@ describe('QuestionComponent', () => {
     component = fixture.componentInstance;
 
     de = fixture.debugElement.query(By.css('.card-header'));
-    el = de.nativeElement
+    el = de.nativeElement;
 
-    dataService = de.injector.get(DataService)
-    component.question = { text: 'What is your name?', answer: 'Aara', hide: false }
+    dataService = de.injector.get(DataService);
+    component.question = { text: 'What is your name?', answer: 'Aara', hide: false };
     fixture.detectChanges();
   });
 
@@ -44,7 +44,7 @@ describe('QuestionComponent', () => {
 
   it('verify answer', () => {
     de = fixture.debugElement.query(By.css('.card-text'));
-    el = de.nativeElement
+    el = de.nativeElement;
     expect(el.textContent).toEqual('Aara');
-  })
+  });
 });

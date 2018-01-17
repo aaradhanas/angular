@@ -9,16 +9,15 @@ import { Question } from '../../models/Question';
 })
 export class QuestionListComponent implements OnInit {
 
-  questions:Question[];
-  constructor(public dataService:DataService) { 
-   
+  questions: Question[];
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {
     this.questions = this.dataService.getQuestions();
   }
 
-  addQuestion(question:Question){
+  addQuestion(question: Question) {
     this.dataService.addQuestion(question);
   }
 

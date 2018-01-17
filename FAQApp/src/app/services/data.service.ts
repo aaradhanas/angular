@@ -4,23 +4,23 @@ import { Question } from '../models/Question';
 @Injectable()
 export class DataService {
 
-  questions:Question[] = [];
-  constructor() { 
+  questions: Question[] = [];
+  constructor() {
   }
 
   // Get questions from local storage
-  getQuestions(){
-    if(localStorage.getItem('questions') != null){
+  getQuestions() {
+    if (localStorage.getItem('questions') != null) {
       this.questions = JSON.parse(localStorage.getItem('questions'));
     }
     return this.questions;
   }
 
   // Add questions to local storage
-  addQuestion(question:Question){
+  addQuestion(question: Question) {
     this.questions.unshift(question);
 
-    //Init local variable
+    // Init local variable
     /*let questions = [];
     if(localStorage.getItem('questions') === null){
       questions = [];
@@ -37,10 +37,10 @@ export class DataService {
   }
 
   // Remove questions from local storage
-  removeQuestion(question:Question){
-    for(let i = 0; i< this.questions.length; i++){
-      if(this.questions[i] == question){
-        this.questions.splice(i,1);
+  removeQuestion(question: Question) {
+    for (let i = 0; i < this.questions.length; i++) {
+      if (this.questions[i] === question) {
+        this.questions.splice(i, 1);
         localStorage.setItem('questions', JSON.stringify(this.questions));
       }
     }

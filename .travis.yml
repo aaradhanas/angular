@@ -17,4 +17,5 @@ before_script:
 script:
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
   - cd ../FAQApp
+  - ng lint
   - ng build --prod

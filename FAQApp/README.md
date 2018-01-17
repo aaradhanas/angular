@@ -21,4 +21,8 @@ The project does not contain the dependent node modules. To have the app running
 * Run `npm install`
 * Run `ng serve` for a dev server.
 
+## Static code analysis
+
+TSLint is a tool used for static code analysis of typescript files. The configuration for the same is specified in the tsconfig.json file present in the project root. Run the command `ng lint` to do the code analysis.
+
 You can now view the app by navigating to `http://localhost:4200/`.
