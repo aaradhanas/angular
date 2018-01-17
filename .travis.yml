@@ -10,7 +10,7 @@ branches:
 before_script:
   - cd FAQApp
   - npm install
-  - cd showdown-angular4
+  - cd ../showdown-angular4
   - npm install
   - npm install -g angular-cli-ghpages
 
