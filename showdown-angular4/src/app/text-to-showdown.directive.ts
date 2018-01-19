@@ -10,11 +10,11 @@ const converter = new showdownJs.Converter();
 })
 export class TextToShowdownDirective {
 
-  @Input('appTextToShowdown') inputText: string;
+  @Input() inputText: string;
 
   constructor(private el: ElementRef) {
-    console.log('text = '+this.inputText);
-    var sdText = converter.makeHtml(this.inputText);
+    console.log('text = ' + this.inputText);
+    const sdText = converter.makeHtml(this.inputText);
     this.el.nativeElement.innerHTML =  sdText;
   }
 

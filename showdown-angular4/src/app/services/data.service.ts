@@ -1,17 +1,17 @@
-import { Injectable,Output, EventEmitter } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
-import { Http, Headers, RequestOptions } from '@angular/http'; 
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 
 
-var showdownJs = require('showdown');
+const showdownJs = require('showdown');
 
 @Injectable()
 export class DataService {
 
-  leftVisible:boolean = true;
+  leftVisible = true;
 
   @Output()
   versionChange: EventEmitter<String> = new EventEmitter();
@@ -48,29 +48,29 @@ export class DataService {
 
   getVersions(): Observable<string[]>{
     return this.http
-      .get("https://api.github.com/repos/showdownjs/showdown/releases")
+      .get('https://api.github.com/repos/showdownjs/showdown/releases')
       .map( res => {
-        return res.json().map( item => { 
+        return res.json().map( item => {
             return item.tag_name;
         });
-      })
-      //TODO compare versions greater than 1.0.0
+      });
+      // TODO compare versions greater than 1.0.0
   }
 
-  getHash(){
+  getHash() {
     return this.http.get('assets/md/text.md');
   }
 
-  getOptions(){
-   var defaultOptions = showdownJs.getDefaultOptions(false);
+  getOptions() {
+   const defaultOptions = showdownJs.getDefaultOptions(false);
 
-   var savedCheckOpts;
-   var savedNumOpts;
-   var savedTextOpts;
+   let savedCheckOpts;
+   let savedNumOpts;
+   let savedTextOpts;
 
-   for( var opt in defaultOptions){
+   for (const opt in defaultOptions) {
     if (defaultOptions.hasOwnProperty(opt)) {
-      var nOpt = (defaultOptions[opt].hasOwnProperty('defaultValue')) ? defaultOptions[opt].defaultValue : true;
+      let nOpt = (defaultOptions[opt].hasOwnProperty('defaultValue')) ? defaultOptions[opt].defaultValue : true;
       if (defaultOptions[opt].type === 'boolean') {
         if (!this.options.checkOpts.hasOwnProperty(opt)) {
           this.options.checkOpts[opt] = nOpt;
@@ -79,8 +79,7 @@ export class DataService {
         if (!this.options.numOpts.hasOwnProperty(opt)) {
           this.options.numOpts[opt] = nOpt;
         }
-      }
-      else{
+      } else {
         if (!this.options.textOpts.hasOwnProperty(opt)) {
           // fix bug in showdown's older version that specifies 'ghCompatibleHeaderId' as a string instead of boolean
           if (opt === 'ghCompatibleHeaderId') {
@@ -94,21 +93,21 @@ export class DataService {
       }
     }
   }
-  if(localStorage.getItem("checkOpts")){
-    savedCheckOpts = JSON.parse(localStorage.getItem("checkOpts"));
+  if (localStorage.getItem('checkOpts')) {
+    savedCheckOpts = JSON.parse(localStorage.getItem('checkOpts'));
   }
 
-  if(localStorage.getItem("numOpts")){
-    savedNumOpts = JSON.parse(localStorage.getItem("numOpts"));
+  if (localStorage.getItem('numOpts')) {
+    savedNumOpts = JSON.parse(localStorage.getItem('numOpts'));
   }
 
-  if(localStorage.getItem("textOpts")){
-    savedTextOpts = JSON.parse(localStorage.getItem("textOpts"));
+  if (localStorage.getItem('textOpts')) {
+    savedTextOpts = JSON.parse(localStorage.getItem('textOpts'));
   }
 
-  for( var opt in this.options.checkOpts){
-   for( var savedOpt in savedCheckOpts){
-     if(opt === savedOpt){
+  for (var opt in this.options.checkOpts){
+   for (const savedOpt in savedCheckOpts){
+     if (opt === savedOpt){
        this.options.checkOpts[opt] = savedCheckOpts[savedOpt];
      }
    }
@@ -133,21 +132,21 @@ export class DataService {
    return this.options;
   }
 
-  updateOptions(opts){
-    //TODO
+  updateOptions(opts) {
+    // TODO
     this.optionsChange.emit(opts);
   }
 
-  //This method is used for transmitting the current active version from left navbar to top navbar
-  updateVersion(version){
+  // This method is used for transmitting the current active version from left navbar to top navbar
+  updateVersion(version) {
     this.versionChange.emit(version);
   }
 
-  isLeftVisible(){
+  isLeftVisible() {
     return this.leftVisible;
   }
 
-  setLeftVisible(isVisible){
+  setLeftVisible(isVisible) {
     this.leftVisible = isVisible;
     this.leftVisibleChange.emit(this.leftVisible);
   }

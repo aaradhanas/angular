@@ -9,9 +9,9 @@ import { DataService } from '../../services/data.service';
 })
 export class TopNavbarComponent implements OnInit {
 
-  showModal:boolean = false;
-  leftVisible:boolean;
-  version:string;
+  showModal = false;
+  leftVisible: boolean;
+  version: string;
   text: string;
   hashText: string;
 
@@ -19,20 +19,13 @@ export class TopNavbarComponent implements OnInit {
 
   ngOnInit() {
     this.leftVisible = this.dataService.isLeftVisible();
-    this.version = localStorage.getItem("version") || 'develop';
+    this.version = localStorage.getItem('version') || 'develop';
     this.dataService.versionChange.subscribe( version => {
-      //this.version = version;
-      this.version = localStorage.getItem("version") || 'develop';
-    })
+      this.version = localStorage.getItem('version') || 'develop';
+    });
   }
 
-  getCookie(name) {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
-  }
-
-  getHash(){
+  getHash() {
     this.dataService.getHash()
     .subscribe(res => {
       this.text = res.text();
@@ -41,20 +34,19 @@ export class TopNavbarComponent implements OnInit {
     });
   }
 
-  toggleMenu(){
+  toggleMenu() {
     this.leftVisible = ! this.leftVisible;
-    console.log("this.leftVisible = "+this.leftVisible);
+    console.log('this.leftVisible = ' + this.leftVisible);
 
-    if( this.leftVisible ){
-      document.body.classList.remove("full-body");
-      document.body.classList.add("squeezed-body");
-    }
-    else{
-      document.body.classList.remove("squeezed-body");
-      document.body.classList.add("full-body");
+    if ( this.leftVisible ) {
+      document.body.classList.remove('full-body');
+      document.body.classList.add('squeezed-body');
+    }else {
+      document.body.classList.remove('squeezed-body');
+      document.body.classList.add('full-body');
     }
 
-    this.dataService.setLeftVisible(this.leftVisible);    
+    this.dataService.setLeftVisible(this.leftVisible);
   }
 
 }

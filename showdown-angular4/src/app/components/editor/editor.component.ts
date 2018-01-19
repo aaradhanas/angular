@@ -17,14 +17,13 @@ export class EditorComponent implements OnInit {
   cText: string;
   options =  {};
 
-  constructor(private dataService:DataService) { 
-    console.log("this.text = "+ this.text);
+  constructor(private dataService: DataService) {
+    console.log('this.text = ' + this.text);
   }
 
   ngOnInit() {
     this.getText();
-    
-    this.options = this.dataService.getOptions(); 
+    this.options = this.dataService.getOptions();
 
     for( var optType in this.options){
       var typeOpts = this.options[optType];
@@ -41,7 +40,7 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  getText(){
+  getText() {
     this.dataService.getHash()
     .subscribe(res => {
       this.text = res.text();
@@ -49,8 +48,8 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  textChanged(){
-    console.log("textChanged");
+  textChanged() {
+    console.log('textChanged');
     this.cText = converter.makeHtml(this.text);
   }
 }

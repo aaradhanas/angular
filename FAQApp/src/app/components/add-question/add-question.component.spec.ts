@@ -10,7 +10,7 @@ describe('AddQuestionComponent', () => {
   let component: AddQuestionComponent;
   let fixture: ComponentFixture<AddQuestionComponent>;
   let de: DebugElement;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AddQuestionComponent ],

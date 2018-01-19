@@ -4,8 +4,8 @@
     <div class="lateral-menu-content-inner">
 
       <div *ngFor="let key of keys(checkOpts)">
-          <input id="checkOpts-{{$key}}" (change)="checkValueChanged()" type="checkbox" [(ngModel)]="checkOpts[key]"/>
-          <label for="checkOpts-{{$key}}" class="inline">{{ key }}</label>
+          <input id="checkOpts-{{key}}" (change)="checkValueChanged()" type="checkbox" [(ngModel)]="checkOpts[key]"/>
+          <label for="checkOpts-{{key}}" class="inline">{{ key }}</label>
       </div>
 
       <div *ngFor="let key of keys(numOpts)">

@@ -24,44 +24,44 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class LeftNavbarComponent implements OnInit {
 
-  state:string;
-  versions = ['develop','master'];
+  state: string;
+  versions = ['develop', 'master'];
 
-  //set the current active version
-  activeVersion:string;
+  // set the current active version
+  activeVersion: string;
 
-  checkOpts = {}
-  numOpts = {}
-  textOpts = {}
-  
-  constructor(private dataService:DataService) { }
+  checkOpts = { };
+  numOpts = { };
+  textOpts = { };
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible'
+    this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible';
 
     this.dataService.leftVisibleChange.subscribe( visible => {
-      this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible'
-    })
+      this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible';
+    });
 
     this.dataService.getVersions().subscribe( data => {
-      for(var r in data){
+      for (var r in data) {
         this.versions.push(data[r]);
       }
-      console.log("Versions : "+ this.versions);
+      console.log('Versions : ' + this.versions);
     });
 
     this.activeVersion = localStorage.getItem('version') || 'develop';
 
-    //TODO Get options based on showdown version
-    var options = this.dataService.getOptions();
-    this.checkOpts = options['checkOpts']
-    this.numOpts = options['numOpts']
-    this.textOpts = options['textOpts']
+    // TODO Get options based on showdown version
+    const options = this.dataService.getOptions();
+    this.checkOpts = options['checkOpts'];
+    this.numOpts = options['numOpts'];
+    this.textOpts = options['textOpts'];
   }
 
-  onVersionChange(){
-    console.log("Updated version = "+ this.activeVersion);
-    localStorage.setItem("version", this.activeVersion);
+  onVersionChange() {
+    console.log('Updated version = ' + this.activeVersion);
+    localStorage.setItem('version', this.activeVersion);
     this.dataService.updateVersion(this.activeVersion);
   }
 
@@ -69,27 +69,27 @@ export class LeftNavbarComponent implements OnInit {
     return Object.keys(obj);
   }
 
-  isType( value:any, type:string){
-    //console.log("value = "+ value+ ", type = "+type);
+  isType( value: any, type: string) {
+    // console.log("value = "+ value+ ", type = "+type);
     return typeof value === type;
   }
 
-  checkValueChanged(){
-    localStorage.setItem("checkOpts",JSON.stringify(this.checkOpts));
-    console.log("checkValueChanged = "+ JSON.stringify(this.checkOpts));
-    this.dataService.updateOptions(this.checkOpts)
+  checkValueChanged() {
+    localStorage.setItem('checkOpts', JSON.stringify(this.checkOpts));
+    console.log('checkValueChanged = ' + JSON.stringify(this.checkOpts));
+    this.dataService.updateOptions(this.checkOpts);
   }
 
-  numValueChanged(){
-    localStorage.setItem("numOpts",JSON.stringify(this.numOpts));
-    console.log("numValueChanged = "+ JSON.stringify(this.numOpts));
-    this.dataService.updateOptions(this.numOpts)
+  numValueChanged() {
+    localStorage.setItem('numOpts', JSON.stringify(this.numOpts));
+    console.log('numValueChanged = ' + JSON.stringify(this.numOpts));
+    this.dataService.updateOptions(this.numOpts);
   }
 
-  textValueChanged(){
-    localStorage.setItem("textOpts",JSON.stringify(this.textOpts));
-    console.log("textValueChanged = "+ JSON.stringify(this.textOpts));
-    this.dataService.updateOptions(this.textOpts)
+  textValueChanged() {
+    localStorage.setItem('textOpts', JSON.stringify(this.textOpts));
+    console.log('textValueChanged = ' + JSON.stringify(this.textOpts));
+    this.dataService.updateOptions(this.textOpts);
   }
 
 }
