@@ -44,7 +44,7 @@ export class LeftNavbarComponent implements OnInit {
     });
 
     this.dataService.getVersions().subscribe( data => {
-      for (var r in data) {
+      for (const r of Object.keys(data)) {
         this.versions.push(data[r]);
       }
       console.log('Versions : ' + this.versions);

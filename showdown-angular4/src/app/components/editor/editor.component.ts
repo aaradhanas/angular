@@ -25,15 +25,15 @@ export class EditorComponent implements OnInit {
     this.getText();
     this.options = this.dataService.getOptions();
 
-    for( var optType in this.options){
-      var typeOpts = this.options[optType];
-      for( var opt in typeOpts){
+    for (const optType of Object.keys(this.options)){
+      const typeOpts = this.options[optType];
+      for (const opt of Object.keys(typeOpts)) {
         converter.setOption(opt, typeOpts[opt]);
       }
     }
-   
+
     this.dataService.optionsChange.subscribe( opts => {
-      for( var opt in opts){
+      for (const opt of Object.keys(opts)){
         converter.setOption(opt, opts[opt]);
       }
       this.cText = converter.makeHtml(this.text);

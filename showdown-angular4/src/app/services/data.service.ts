@@ -42,11 +42,11 @@ export class DataService {
     'textOpts' : {
       'prefixHeaderId' : ''
     }
-  }
+  };
 
   constructor(private http: Http) { }
 
-  getVersions(): Observable<string[]>{
+  getVersions(): Observable<string[]> {
     return this.http
       .get('https://api.github.com/repos/showdownjs/showdown/releases')
       .map( res => {
@@ -105,30 +105,30 @@ export class DataService {
     savedTextOpts = JSON.parse(localStorage.getItem('textOpts'));
   }
 
-  for (var opt in this.options.checkOpts){
-   for (const savedOpt in savedCheckOpts){
-     if (opt === savedOpt){
-       this.options.checkOpts[opt] = savedCheckOpts[savedOpt];
-     }
+  for (const opt of Object.keys(this.options.checkOpts)) {
+      for (const savedOpt in savedCheckOpts) {
+        if (opt === savedOpt) {
+          this.options.checkOpts[opt] = savedCheckOpts[savedOpt];
+        }
    }
   }
 
-  for( var opt in this.options.numOpts){
-    for( var savedOpt in savedNumOpts){
-      if(opt === savedOpt){
-        this.options.numOpts[opt] = savedNumOpts[savedOpt];
-      }
+  for (const opt of Object.keys(this.options.numOpts)) {
+      for (const savedOpt in savedNumOpts) {
+        if (opt === savedOpt) {
+          this.options.numOpts[opt] = savedNumOpts[savedOpt];
+        }
     }
    }
 
-  for( var opt in this.options.textOpts){
-    for( var savedOpt in savedTextOpts){
-      if(opt === savedOpt){
-        this.options.textOpts[opt] = savedTextOpts[savedOpt];
-      }
+  for (const opt of Object.keys(this.options.textOpts)) {
+      for (const savedOpt in savedTextOpts) {
+        if (opt === savedOpt) {
+          this.options.textOpts[opt] = savedTextOpts[savedOpt];
+        }
     }
    }
-   
+
    return this.options;
   }
 

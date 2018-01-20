@@ -13,6 +13,7 @@ before_script:
   - cd ../showdown-angular4
   - npm install
   - npm install -g angular-cli-ghpages
+  - ng lint
 
 script:
   - ng build --prod --base-href https://aaradhanas.github.io/angular/

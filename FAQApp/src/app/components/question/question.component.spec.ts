@@ -39,12 +39,12 @@ describe('QuestionComponent', () => {
   });
 
   it('verify question', () => {
-    expect(el.textContent).toContain('What is your name?');
+    expect(el.textContent).toContain(component.question.text);
   });
 
   it('verify answer', () => {
     de = fixture.debugElement.query(By.css('.card-text'));
     el = de.nativeElement;
-    expect(el.textContent).toEqual('Aara');
+    expect(el.textContent).toEqual(component.question.answer);
   });
 });

@@ -23,7 +23,7 @@ import { TextToShowdownDirective } from './text-to-showdown.directive';
   ],
   imports: [
     BrowserModule,
-    HttpModule, 
+    HttpModule,
     FormsModule,
     BrowserAnimationsModule
   ],
