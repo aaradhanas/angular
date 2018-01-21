@@ -1,3 +1,10 @@
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
 language: node_js
 
 node_js:
@@ -6,17 +13,20 @@ node_js:
 branches:
   only:
     - master
-
-before_script:
+  
+install:
   - cd FAQApp
   - npm install
   - cd ../showdown-angular4
   - npm install
   - npm install -g angular-cli-ghpages
-  - ng lint
+   
 
 script:
+  - ng lint
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
   - cd ../FAQApp
-  - ng lint
   - ng build --prod
+  - ng lint
+  - ng test
+  - ng e2e
