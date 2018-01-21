@@ -25,4 +25,3 @@ script:
   - ng build --prod
   - ng lint
   - ng test
-  - ng e2e
