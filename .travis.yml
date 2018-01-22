@@ -31,5 +31,9 @@ script:
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
   
 deploy:
-   - github_token: $GITHUB_TOKEN
-   - ngh
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
