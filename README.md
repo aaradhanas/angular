@@ -2,10 +2,6 @@
 
 This project is inspired by the works of the developers of Showdown editor. The [existing showdown editor] (http://demo.showdownjs.com/) has been developed using AngularJS (Version 1 of Angular). The editor has been rewritten in Angular 4 in a simpler and easier way.
 
-## Live app
-
-The showdown editor is published as a github page and is available at <https://aaradhanas.github.io/angular/>
-
 ## Angular 4 components
 
 Since Angular 2 and higher make use of components for better readability and resuability, the same has been applied here and the editor has been divided into the following components.
@@ -50,4 +46,4 @@ Font-awesome and google fonts has been used here. These have been installed usin
 
 ## License
 
-- [MIT license] (https://github.com/aaradhanas/angular/blob/master/LICENSE)
+- [MIT license](https://github.com/aaradhanas/angular/blob/master/LICENSE)
