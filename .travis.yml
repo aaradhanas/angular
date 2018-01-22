@@ -29,4 +29,5 @@ install:
 script:
   - ng build --prod
   - ng lint
-  - ng test
+  - ng test --watch=false
+  - ng e2e
