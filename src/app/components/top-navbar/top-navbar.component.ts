@@ -12,7 +12,6 @@ export class TopNavbarComponent implements OnInit {
   showModal = false;
   leftVisible: boolean;
   version: string;
-  text: string;
   hashText: string;
 
   constructor(private dataService: DataService) { }
@@ -28,8 +27,8 @@ export class TopNavbarComponent implements OnInit {
   getHash() {
     this.dataService.getHash()
     .subscribe(res => {
-      this.text = res.text();
-      this.hashText = document.location.origin + document.location.pathname + '#/' + encodeURIComponent(this.text);
+      const text = res.text();
+      this.hashText = document.location.origin + document.location.pathname + '#/' + encodeURIComponent(text);
       this.showModal = true;
     });
   }
