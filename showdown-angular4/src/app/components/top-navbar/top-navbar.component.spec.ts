@@ -1,19 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { EventEmitter } from '@angular/core';
 
 import { TopNavbarComponent } from './top-navbar.component';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../services/data.service'
 
 describe('TopNavbarComponent', () => {
   let component: TopNavbarComponent;
   let fixture: ComponentFixture<TopNavbarComponent>;
-  let dataService: DataService;
 
   beforeEach(async(() => {
-    const dataServiceStub = {};
+    const dataServiceStub = {
+      versionChange: new EventEmitter(),
+      isLeftVisible() {
+          return false;
+      }
+    };
+
     TestBed.configureTestingModule({
       declarations: [ TopNavbarComponent ],
-      providers : [ {provide: DataService, useClass: dataServiceStub} ]
+      providers : [ {provide: DataService, useValue: dataServiceStub} ]
     })
     .compileComponents();
   }));
@@ -21,9 +27,6 @@ describe('TopNavbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TopNavbarComponent);
     component = fixture.componentInstance;
-
-    const de = fixture.debugElement.query(By.css('app-top-navbar'));
-    dataService = de.injector.get(DataService);
     fixture.detectChanges();
   });
 
@@ -35,17 +38,18 @@ describe('TopNavbarComponent', () => {
     component.version = 'develop';
     fixture.detectChanges();
 
-    const de = fixture.debugElement.query(By.css('app-top-navbar .version'));
+    const de = fixture.debugElement.query(By.css('.version'));
     const el: HTMLElement = de.nativeElement;
-    expect(el.textContent).toEqual(component.version);
+    expect(el.textContent).toContain(component.version);
   });
 
   it('display hash text modal', () => {
+    // TODO Add encode logic
     component.hashText = 'Test hash text';
     component.showModal = true;
     fixture.detectChanges();
 
-    const de = fixture.debugElement.query(By.css('app-top-navbar modal-wrapper #dlnk'));
+    const de = fixture.debugElement.query(By.css('.modal-wrapper #dlnk'));
     const el: HTMLElement = de.nativeElement;
 
     expect(el.textContent).toEqual(component.hashText);

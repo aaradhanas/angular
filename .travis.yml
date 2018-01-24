@@ -23,20 +23,16 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   
 install:
-  - cd showdown-angular4
+  - cd FAQApp
+  - npm install
+  - cd ../showdown-angular4
   - npm install
 
 script:
   - ng lint
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
+  - cd ../FAQApp
+  - ng build --prod
+  - ng lint
+  - ng test
   
-before_deploy:
-  - cd dist
-  
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  on:
-    branch: master
