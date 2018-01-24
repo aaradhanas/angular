@@ -30,6 +30,9 @@ script:
   - ng lint
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
   
+before_deploy:
+  - cd dist
+  
 deploy:
   provider: pages
   skip-cleanup: true
