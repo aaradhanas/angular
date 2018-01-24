@@ -34,5 +34,5 @@ script:
   - cd ../FAQApp
   - ng build --prod
   - ng lint
-  - ng test
+  - ng test --watch=false
   

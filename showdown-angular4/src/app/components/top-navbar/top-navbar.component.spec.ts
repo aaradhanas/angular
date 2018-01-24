@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { EventEmitter } from '@angular/core';
 
 import { TopNavbarComponent } from './top-navbar.component';
-import { DataService } from '../../services/data.service'
+import { DataService } from '../../services/data.service';
 
 describe('TopNavbarComponent', () => {
   let component: TopNavbarComponent;
