@@ -1,4 +1,4 @@
-# FAQ App
+# FAQ App [![Build Status](https://travis-ci.org/aaradhanas/angular.svg?branch=master)](https://travis-ci.org/aaradhanas/angular) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/aaradhanas/angular/blob/master/LICENSE) [![codecov](https://codecov.io/gh/aaradhanas/angular/branch/master/graph/badge.svg)](https://codecov.io/gh/aaradhanas/angular)
 
 A simple FAQ application built using Angular. An FAQ contains a question and an answer. A list of FAQs are displayed. By default, the answer is hidden and get displayed on request. The FAQs can be deleted, if not required. Following are the functionalities:
 

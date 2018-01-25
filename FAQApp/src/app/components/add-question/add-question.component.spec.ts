@@ -39,15 +39,13 @@ describe('AddQuestionComponent', () => {
     const answerEl = de.nativeElement;
     answerEl.value = 'Aara';
 
-    let addedQuestion: Question;
     component.questionAdded.subscribe((question: Question) =>  {
-      addedQuestion = question;
-      expect(addedQuestion.text).toEqual(questionEl.value);
-      expect(addedQuestion.answer).toEqual(answerEl.value);
+      expect(question.text).toEqual(questionEl.value);
+      expect(question.answer).toEqual(answerEl.value);
     });
 
-    de = fixture.debugElement.query(By.css('.btn'));
-
-    de.triggerEventHandler('click', null);
+    component.text = questionEl.value;
+    component.answer = answerEl.value;
+    component.addQuestion();
   });
 });

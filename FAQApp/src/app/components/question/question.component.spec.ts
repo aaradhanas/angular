@@ -10,11 +10,14 @@ describe('QuestionComponent', () => {
   let fixture: ComponentFixture<QuestionComponent>;
   let de: DebugElement;
   let el: HTMLElement;
-  let dataService: DataService;
 
   beforeEach(async(() => {
 
-    const dataServiceStub = {};
+    const dataServiceStub = {
+      removeQuestion() {
+        component.question = { text: '', answer: '', hide: false };
+      }
+    };
     TestBed.configureTestingModule({
       declarations: [ QuestionComponent ],
       providers: [{provide: DataService, useValue: dataServiceStub}]
@@ -28,8 +31,6 @@ describe('QuestionComponent', () => {
 
     de = fixture.debugElement.query(By.css('.card-header'));
     el = de.nativeElement;
-
-    dataService = de.injector.get(DataService);
     component.question = { text: 'What is your name?', answer: 'Aara', hide: false };
     fixture.detectChanges();
   });
@@ -43,6 +44,16 @@ describe('QuestionComponent', () => {
   });
 
   it('verify answer', () => {
+    de = fixture.debugElement.query(By.css('.card-text'));
+    el = de.nativeElement;
+    expect(el.textContent).toEqual(component.question.answer);
+  });
+
+  it('delete question', () => {
+    component.removeQuestion(component.question);
+    fixture.detectChanges();
+
+    expect(el.textContent).toContain(component.question.text);
     de = fixture.debugElement.query(By.css('.card-text'));
     el = de.nativeElement;
     expect(el.textContent).toEqual(component.question.answer);

@@ -34,5 +34,9 @@ script:
   - cd ../FAQApp
   - ng build --prod
   - ng lint
-  - ng test --watch=false
+  - ng test --watch=false --code-coverage
+  - ng e2e
+  
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
   
