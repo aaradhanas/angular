@@ -12,32 +12,30 @@ import { DebugElement } from '@angular/core';
 describe('LeftNavbarComponent', () => {
   let component: LeftNavbarComponent;
   let fixture: ComponentFixture<LeftNavbarComponent>;
-  let dataServiceStub;
   let de: DebugElement;
   let el: HTMLElement;
+  const dataServiceStub = {
+    leftVisibleChange: new EventEmitter(),
+    isLeftVisible() {
+      return false;
+    },
+    getVersions() {
+      // not necessary to populate data
+       return Observable.create( observer => {
+         observer.next(['1.0.0', '2.0.0']);
+         observer.complete();
+       });
+    },
+    getOptions() {
+      return {
+        'checkOpts': { 'omitExtraWLInCodeBlocks': true },
+        'numOpts': { 'headerLevelStart': 3 },
+        'textOpts': { 'prefixHeaderId' : 'p1' }
+      };
+    }
+  };
 
   beforeEach(async(() => {
-
-     dataServiceStub = {
-      leftVisibleChange: new EventEmitter(),
-      isLeftVisible() {
-        return false;
-      },
-      getVersions() {
-        // not necessary to populate data
-         return Observable.create( observer => {
-           observer.next(['1.0.0', '2.0.0']);
-           observer.complete();
-         });
-      },
-      getOptions() {
-        return {
-          'checkOpts': { 'omitExtraWLInCodeBlocks': true },
-          'numOpts': { 'headerLevelStart': 3 },
-          'textOpts': { 'prefixHeaderId' : 'p1' }
-        };
-      }
-    };
     TestBed.configureTestingModule({
       declarations: [ LeftNavbarComponent ],
       providers : [{ provide: DataService, useValue: dataServiceStub}],
