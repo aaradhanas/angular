@@ -15,6 +15,19 @@ describe('DataService isolated test', () => {
     expect(service).toBeTruthy();
   }));
 
+  it('check versions list length', inject([DataService], (service: DataService) => {
+    service.getVersions().subscribe( versions => {
+      expect(versions.length).toEqual(30);
+    });
+  }));
+
+  it('check first and latest version', inject([DataService], (service: DataService) => {
+    service.getVersions().subscribe( versions => {
+      expect(versions[0]).toEqual('1.8.6');
+      expect(versions[versions.length - 1]).toEqual('1.3.0');
+    });
+  }));
+
   it('update left nav bar visibility', inject([DataService], (service: DataService) => {
     // Check default value of isLeftVisible
     expect(service.isLeftVisible()).toEqual(true);

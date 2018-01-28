@@ -69,11 +69,6 @@ export class LeftNavbarComponent implements OnInit {
     return Object.keys(obj);
   }
 
-  isType( value: any, type: string) {
-    // console.log("value = "+ value+ ", type = "+type);
-    return typeof value === type;
-  }
-
   checkValueChanged() {
     localStorage.setItem('checkOpts', JSON.stringify(this.checkOpts));
     console.log('checkValueChanged = ' + JSON.stringify(this.checkOpts));
