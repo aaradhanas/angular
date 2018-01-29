@@ -7,8 +7,20 @@ describe('showdown-angular4 App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('check left nav bar visibility', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    page.getToggleLink().click();
+    page.getLeftNavBar().isDisplayed().then( displayed => {
+      page.wait(!displayed, 0.5);
+      expect(displayed).toEqual(false);
+    });
+  });
+
+  it('show hash modal', () => {
+    page.navigateTo();
+    page.getHashLink().click();
+    page.getHashModal().isPresent().then( present => {
+      expect(present).toBe(true);
+    });
   });
 });
