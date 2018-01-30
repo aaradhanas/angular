@@ -30,6 +30,8 @@ install:
 
 script:
   - ng lint
+  - ng test --watch=false
+  - ng e2e
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
   - cd ../FAQApp
   - ng build --prod
