@@ -15,7 +15,7 @@ describe('LeftNavbarComponent', () => {
   let de: DebugElement;
   let el: HTMLElement;
   const dataServiceStub = {
-    leftVisibleChange: new EventEmitter(),
+    leftVisibleChange: new EventEmitter<boolean>(),
     isLeftVisible() {
       return false;
     },
@@ -62,16 +62,19 @@ describe('LeftNavbarComponent', () => {
     expect(el.style.display).toBe('none');
   });
 
-  it('check visible', () => {
-    component.state = 'visible';
-    fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('.lateral-menu'));
-    el = de.nativeElement;
-    expect(el.style.display).toBe('');
+  it('check version change emitter', () => {
+    dataServiceStub.leftVisibleChange.emit(true);
+    dataServiceStub.leftVisibleChange.subscribe(visible => {
+      component.state = visible ? 'visible' : 'invisible';
+      fixture.detectChanges();
+      de = fixture.debugElement.query(By.css('.lateral-menu'));
+      el = de.nativeElement;
+      expect(el.style.display).toBe('');
+    });
   });
 
   it('verify active version', () => {
-    spyOn(component, 'onVersionChange');
+    spyOn(component, 'onVersionChange').and.callThrough();
 
     de = fixture.debugElement.query(By.css('select'));
     el = de.nativeElement;
@@ -83,7 +86,7 @@ describe('LeftNavbarComponent', () => {
   });
 
   it('verify check opts change', () => {
-    spyOn(component, 'checkValueChanged');
+    spyOn(component, 'checkValueChanged').and.callThrough();
 
     const key = 'omitExtraWLInCodeBlocks';
     de = fixture.debugElement.query(By.css('#checkOpts-' + key));
@@ -95,7 +98,7 @@ describe('LeftNavbarComponent', () => {
   });
 
   it('verify num opts change', () => {
-    spyOn(component, 'numValueChanged');
+    spyOn(component, 'numValueChanged').and.callThrough();
 
     de = fixture.debugElement.query(By.css('#numOpts-headerLevelStart'));
     el = de.nativeElement;
@@ -106,7 +109,7 @@ describe('LeftNavbarComponent', () => {
   });
 
   it('verify text opts change', () => {
-    spyOn(component, 'textValueChanged');
+    spyOn(component, 'textValueChanged').and.callThrough();
 
     de = fixture.debugElement.query(By.css('#textOpts-prefixHeaderId'));
     el = de.nativeElement;

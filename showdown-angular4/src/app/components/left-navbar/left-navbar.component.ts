@@ -40,7 +40,7 @@ export class LeftNavbarComponent implements OnInit {
     this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible';
 
     this.dataService.leftVisibleChange.subscribe( visible => {
-      this.state = this.dataService.isLeftVisible() ? 'visible' : 'invisible';
+      this.state = visible ? 'visible' : 'invisible';
     });
 
     this.dataService.getVersions().subscribe( data => {

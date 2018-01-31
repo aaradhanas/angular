@@ -62,11 +62,20 @@ describe('EditorComponent', () => {
   });
 
   it('change text event', () => {
-    spyOn(component, 'textChanged');
+    spyOn(component, 'textChanged').and.callThrough();
     de = fixture.debugElement.query(By.css('#editor'));
     el = de.nativeElement;
 
     el.dispatchEvent(new Event('input'));
     expect(component.textChanged).toHaveBeenCalled();
+  });
+
+  // Added for code coverage
+  it('check options change event', () => {
+    const opts = {'optionKey' : 'optionValue'};
+    dataServiceStub.optionsChange.emit(opts);
+    dataServiceStub.optionsChange.subscribe( options => {
+      expect(options).toEqual(opts);
+    });
   });
 });

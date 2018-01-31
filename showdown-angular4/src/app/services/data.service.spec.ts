@@ -57,4 +57,22 @@ describe('DataService isolated test', () => {
     });
   }));
 
+  it('get hash', inject([DataService], (service: DataService) => {
+    service.getHash().subscribe( text => {
+      expect(text).toContain('![Showdown][sd-logo]');
+      expect(text).toContain('[emoji list]: https://github.com/showdownjs/showdown/wiki/emojis');
+    });
+  }));
+
+  it('check options in local storage', inject([DataService], (service: DataService) => {
+    localStorage.setItem('checkOpts', JSON.stringify({'omitExtraWLInCodeBlocks': false}));
+    localStorage.setItem('numOpts', JSON.stringify({'headerLevelStart': 4}));
+    localStorage.setItem('textOpts', JSON.stringify({'prefixHeaderId': 'p1'}));
+
+    const options = service.getOptions();
+
+    expect(options.checkOpts['omitExtraWLInCodeBlocks']).toEqual(false);
+    expect(options.numOpts['headerLevelStart']).toEqual(4);
+    expect(options.textOpts['prefixHeaderId']).toEqual('p1');
+  }));
 });
