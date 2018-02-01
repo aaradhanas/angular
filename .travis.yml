@@ -38,7 +38,7 @@ script:
   - ng lint
   - ng test --watch=false --code-coverage
   - ng e2e
-  
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -t a6b3d808-4f34-4ca3-b284-0462bcd6fbb5
+
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
   
