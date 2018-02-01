@@ -23,6 +23,7 @@
     "@angular/router": "^4.2.4",
     "angular-cli-ghpages": "^0.5.2",
     "angular2-markdown": "^2.2.2",
+    "codecov": "^3.0.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.4.0",
     "google-fonts": "^1.0.0",

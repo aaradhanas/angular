@@ -30,7 +30,7 @@ install:
 
 script:
   - ng lint
-  - ng test --watch=false
+  - ng test --watch=false --code-coverage
   - ng e2e
   - ng build --prod --base-href https://aaradhanas.github.io/angular/
   - cd ../FAQApp
@@ -38,4 +38,7 @@ script:
   - ng lint
   - ng test --watch=false --code-coverage
   - ng e2e
+  
+after_success:
+  - codecov -t a6b3d808-4f34-4ca3-b284-0462bcd6fbb5
   
