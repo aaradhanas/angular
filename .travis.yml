@@ -32,3 +32,6 @@ script:
   - ng test --watch=false --code-coverage
   - ng e2e
   
+afrer_success:
+  - codecov
+  

@@ -11,6 +11,22 @@ describe('DataService isolated test', () => {
     });
   });
 
+  beforeAll(() => {
+    let store = {};
+    spyOn(localStorage, 'getItem').and.callFake( function(key){
+      console.log('spyOn getItem');
+      return store[key];
+    });
+    spyOn(localStorage, 'setItem').and.callFake( function(key, value){
+      console.log('spyOn setItem');
+      return store[key] = value;
+    });
+    spyOn(localStorage, 'clear').and.callFake( function(key){
+      console.log('spyOn clear');
+      return store = {};
+    });
+  });
+
   it('should be created', inject([DataService], (service: DataService) => {
     expect(service).toBeTruthy();
   }));
@@ -58,9 +74,9 @@ describe('DataService isolated test', () => {
   }));
 
   it('get hash', inject([DataService], (service: DataService) => {
-    service.getHash().subscribe( text => {
-      expect(text).toContain('![Showdown][sd-logo]');
-      expect(text).toContain('[emoji list]: https://github.com/showdownjs/showdown/wiki/emojis');
+    service.getHash().subscribe( res => {
+      expect(res.text()).toContain('![Showdown][sd-logo]');
+      expect(res.text()).toContain('[emoji list]: https://github.com/showdownjs/showdown/wiki/emojis');
     });
   }));
 
@@ -74,5 +90,7 @@ describe('DataService isolated test', () => {
     expect(options.checkOpts['omitExtraWLInCodeBlocks']).toEqual(false);
     expect(options.numOpts['headerLevelStart']).toEqual(4);
     expect(options.textOpts['prefixHeaderId']).toEqual('p1');
+
+    localStorage.clear();
   }));
 });
