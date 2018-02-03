@@ -62,7 +62,7 @@ describe('LeftNavbarComponent', () => {
     expect(el.style.display).toBe('none');
   });
 
-  it('check version change emitter', () => {
+  it('check left visible change emitter', () => {
     dataServiceStub.leftVisibleChange.emit(true);
     dataServiceStub.leftVisibleChange.subscribe(visible => {
       component.state = visible ? 'visible' : 'invisible';
