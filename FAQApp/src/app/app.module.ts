@@ -10,6 +10,13 @@ import { DataService } from './services/data.service';
 import { QuestionComponent } from './components/question/question.component';
 import { AddQuestionComponent } from './components/add-question/add-question.component';
 
+// For keycloak
+
+import { KeycloakService } from './keycloak/keycloak.service';
+import { KeycloakHttp } from './keycloak/keycloak.http';
+import { keycloakHttpFactory } from './keycloak/keycloak.http';
+import { XHRBackend, RequestOptions } from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +29,14 @@ import { AddQuestionComponent } from './components/add-question/add-question.com
     BrowserModule,
     FormsModule
   ],
-  providers: [ DataService ],
+  providers: [
+    DataService,
+    {
+      provide: KeycloakHttp,
+      useFactory: keycloakHttpFactory,
+      deps : [XHRBackend, RequestOptions, KeycloakService]
+    },
+    KeycloakService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

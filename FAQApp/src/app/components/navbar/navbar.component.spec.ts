@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 
 import { NavbarComponent } from './navbar.component';
 
+import { KeycloakService } from '../../keycloak/keycloak.service';
+
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
@@ -12,7 +14,8 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarComponent ]
+      declarations: [ NavbarComponent ],
+      providers: [ KeycloakService ]
     })
     .compileComponents();
   }));
